@@ -9,9 +9,9 @@ const BASE_URL = import.meta.env.MODE == 'development' ? 'http://localhost:5000/
 export const useAuthStore = create((set,get)=>({
     authUser : null,
     isSigningUp : false,
-    isSigningIn : false,
-    isUpdateProfile : false,
-    isCheckingOut : false,
+    isLoggingIn : false,
+    isUpdatingProfile : false,
+    isCheckingAuth : false,
     onlineUsers : [],
     socket : null,
 
@@ -29,7 +29,7 @@ export const useAuthStore = create((set,get)=>({
             set({isCheckingAuth : false});
         }
     },
-    signUp : async (data) => {
+    signup : async (data) => {
         set({isSigningUp : true});
         try {
             const res = await axiosInstance.post('auth/sign_up',data);
@@ -43,8 +43,8 @@ export const useAuthStore = create((set,get)=>({
             set({isSigningUp : false});
         }
     },
-    signIn : async (data) => {
-        set({isSigningIn : true});
+    login : async (data) => {
+        set({isLoggingIn : true});
         try {
             const res = await axiosInstance.post('auth/sign_in',data);
             set({authUser : res.data});
@@ -54,10 +54,10 @@ export const useAuthStore = create((set,get)=>({
             console.log('Error in login', error);
             toast.error('Login failed');
         } finally {
-            set({isSigningIn : false});
+            set({isLoggingIn : false});
         }
     },
-    logOut : async () => {
+    logout : async () => {
         try {
             const res = await axiosInstance.post('auth/logout');
             set({authUser : null});
@@ -70,7 +70,7 @@ export const useAuthStore = create((set,get)=>({
     },
 
     updateProfile : async (data) => {
-        set({isUpdateProfile : true});
+        set({isUpdatingProfile : true});
         try {
             const res = await axiosInstance.post('auth/update',data);
             set({authUser : res.data});
@@ -80,7 +80,7 @@ export const useAuthStore = create((set,get)=>({
             console.log('Error in update', error);
             toast.error('Update failed');
         } finally {
-            set({isUpdateProfile : false});
+            set({isUpdatingProfile : false});
         }
     },
 
