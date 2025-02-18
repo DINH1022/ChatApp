@@ -1,7 +1,7 @@
-import User from '../model/user.model.js';
-import bcrypt from 'bcryptjs';
-import { createAccessToken } from '../../config/token.js';
-import cloudinary from '../../config/cloudinary.js';
+import User from "../model/user.model.js";
+import bcrypt from "bcryptjs";
+import { createAccessToken } from "../config/token.js";
+import cloudinary from "../config/cloudinary.js";
 
 const signup = async (req, res) => {
     const { fullname, email, password, retypePassword } = req.body;
@@ -79,7 +79,7 @@ const signin = async (req, res) => {
 
 const logout = async(req,res)=>{
     try{
-        res.cookie('jwt','',{maxAge:0});
+        res.cookie("jwt","",{maxAge:0});
         res.status(200).json({message: "Logout Success"});
 
     } catch (error){

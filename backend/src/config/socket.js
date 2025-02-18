@@ -1,7 +1,7 @@
-import {Server} from 'socket.io';
-import http from 'http';
-import express from 'express';
-import dotenv from 'dotenv';
+import {Server} from "socket.io";
+import http from "http";
+import express from "express";
+import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
@@ -19,18 +19,18 @@ export function getReceiverSocketId(userid){
     return userSocketMap[userid];
 }
 
-io.on('connection', (socket) =>{
-    console.log('a user connected : ',socket.id);
+io.on("connection", (socket) =>{
+    console.log("a user connected : ",socket.id);
     const userid = socket.handshake.query.userid;
     if(userid) {
         userSocketMap[userid] = socket.id;
     }
 
-    io.emit('getOnlineUsers',Object.keys(userSocketMap));
-    socket.on('disconnect',()=>{
-        console.log('a user connected : ',socket.id);
+    io.emit("getOnlineUsers",Object.keys(userSocketMap));
+    socket.on("disconnect",()=>{
+        console.log("a user connected : ",socket.id);
         delete userSocketMap[userid];
-        io.emit('getOnlineUsers',Object.keys(userSocketMap));
+        io.emit("getOnlineUsers",Object.keys(userSocketMap));
     });
 
 });

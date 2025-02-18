@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
     {
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
         },
         avatar:{
             type: String,
-            default: 'https://res.cloudinary.com/dxkufsejm/image/upload/v1621402313/avatar/avatar_cugq40.png',
+            default: "https://res.cloudinary.com/dxkufsejm/image/upload/v1621402313/avatar/avatar_cugq40.png",
         },
     },
     {
@@ -26,5 +26,5 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-const User = mongoose.model('User',userSchema);
+const User = mongoose.model("User",userSchema);
 export default User;
